@@ -1,0 +1,89 @@
+html
+{
+    overflow-x: hidden;
+}
+body{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+#cap{
+    font-size: 50px;
+    color: orangered;
+}
+
+#title-id{
+    text-align: center;
+    padding-top: 30px;
+    letter-spacing: 1.5px;
+}
+
+#nav_id{
+    background: #f77c4a;
+/*    position: fixed;*/
+    margin: 0px;
+    padding: 0px;
+
+}
+
+nav a{
+/*    background: #ffa366;*/
+/*    border: 1px solid black;*/
+    margin-left: 10px;
+    margin-top: 10px;
+/*    border: 1px black solid;*/
+    
+}
+#navbarDropdown
+{
+    color: white;
+}
+
+#nav-text:hover{
+/*    background: #ffe4cc;*/
+/*    letter-spacing: 1px;*/
+/*    color: black;*/
+/*    height: 100%;*/
+    
+}
+
+#drop-id{
+    background-color: bisque;
+    top:47px;
+    margin-top: 4px;    
+    border: 0px;
+}
+
+#drop_devider{
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgrey;
+}
+
+#submit_id{
+    border: 0px solid yellow;
+    color: black;
+    margin-right: 20px;
+    margin-left: 5px;
+    background-color: #ffd699;
+}
+
+#submit_id:hover{
+    border: 0px solid white;
+    color: white;
+    background-color: #00b300;
+}
+
+#nav-text{
+    color: azure;
+    font-family: "niramit",sans-serif;\
+    
+}
+
+#card_id{
+    margin-top: 30px;
+    
+}
+#comment-button-id{
+    width: 80px
+}
