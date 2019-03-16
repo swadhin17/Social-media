@@ -57,9 +57,11 @@ body
 #t1:hover , #t1:focus , #t1.active
 {
     background-color: white;
+/*
     border: 0px;
     width: 250px;
     transition: .5s;
+*/
 }
 .name
 {
@@ -116,18 +118,13 @@ input[type=text]
     cursor: pointer;
     user-select: none;
     color:#f89764;
-    border: 0px;
-    margin-top: -2px;
 }
 
 #fa:hover 
 {
-    color: #f77c4a;
-    background-color: white;
-/*
+  color: #f77c4a;
     font-size: 24px;
     transition: 0.5px;
-*/
 }
 #badge1
 {
@@ -140,7 +137,7 @@ input[type=text]
     background-color: white;
     color: orange;
 */
-    margin-top: 10%;
+    margin-top: 2%;
     margin-right: -20%;
 /*    background-color: white;*/
 } 
@@ -190,7 +187,7 @@ input[type=text]
 {
     letter-spacing: 2px;
     font-family: 'Niramit', sans-serif;
-/*    color: darkorange;*/
+    color: darkorange;
 /*    background-color: black;*/
 }
 #ph
@@ -221,8 +218,29 @@ input[type=text]
     letter-spacing: 2px;
     font-family: 'Niramit', sans-serif;
 }
-#comment_row
+
+#heading-id
 {
-    max-height: 40px;
-    overflow-y: scroll;
+    text-align: center;
+/*    border: 1px solid red;*/
+    margin-bottom: 50px;
+    font-family: 'Niramit', sans-serif;
+}
+
+#name-id
+{
+    text-align: center;
+/*    border: 1px solid red;*/
+    margin-top: 20px;
+    margin-right: 50px;
+    font-size: 17px;
+    font-family: "niramit",sans-serif;
+}
+
+#image-id
+{
+/*    background-image: url(images/Jellyfish.jpg)*/
+    width: 150px;
+    height: 150px;
+    background-size: contain;
 }

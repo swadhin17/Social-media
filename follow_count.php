@@ -1,8 +1,12 @@
 <?php
     
         include "db_connect.php";
+
+//        session_start();
         
-        $name = "swadhin";
+        $name = $_SESSION['new_name'];
+
+//        echo $name;
 
         $seen_query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";     
         
@@ -19,14 +23,42 @@
             $followers = $row['followers'];
             $following = $row['following'];
             
-            $substr_followers = substr($followers,3);
-            $substr_following = substr($following,3);
+            if($following != "")
+            {
+                $substr_following = substr($following,3);    
+//                $substr_followers = substr($followers,3);
+                $explode_following = explode(" , ",$substr_following);
+//                $explode_followers = explode(" , ",$substr_followers);
+                $total_following = count($explode_following);
+//                $total_followers = count($explode_followers);
+                
+                global $total_following;
+            }
+            else 
+            {
+//                $total_followers = 0;
+                $total_following = 0;
+                global $total_following;
+            }
+            if($followers != "")
+            {
+//                $substr_following = substr($following,3);    
+                $substr_followers = substr($followers,3);
+//                $explode_following = explode(" , ",$substr_following);
+                $explode_followers = explode(" , ",$substr_followers);
+//                $total_following = count($explode_following);
+                $total_followers = count($explode_followers);
+                global $total_followers;
+            }
+            else
+            {
+                $total_followers = 0;
+                global $total_followers;
+//                $total_following = 0;
+            }
             
-            $explode_followers = explode(" , ",$substr_followers);
-            $explode_following = explode(" , ",$substr_following);
             
-            $total_followers = count($explode_followers);
-            $total_following = count($explode_following);
+            
             
         }
 

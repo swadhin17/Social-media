@@ -7,14 +7,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
     <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet">
-<!--    <link rel="stylesheet" href="user_page1.css">   -->
+    
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Chakra+Petch" rel="stylesheet"> 
-    
+<!--    <link rel="stylesheet" href="user_page2.css">   -->
     <script src="like_toggle.js" ></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    
     <link rel="stylesheet" href="user_page2.css">   
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,11 +28,16 @@
   <body>
     
    <?php
-   
+      
       session_start();
+   
       $name = $_SESSION['new_name'];
       
-    include "db_connect.php";
+//      echo "name".$_SESSION['new_name'];
+      
+      global $name;
+      
+      include "db_connect.php";
       
       include "like.php";
       include "comment.php";
@@ -40,10 +48,15 @@
       
       include "follow_count.php";
       
+//      include "my_posts.php";
       
-      
+//      echo $total_following,$total_followers;
+//      echo $name;
+//      echo "dsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfs";
       if(isset($_POST['post_submit']))
       {
+          echo "dsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfsdfsfsdfs";
+          
           $post_content = $_POST['post_content'];
           $post_category = $_POST['category'];
       
@@ -58,13 +71,7 @@
 
               }
           
-            
-//          echo $post_content;
-          
-                
-              
-//                echo "recent".$recent_post."";
-                
+            echo $post_content;
       
                 $insert_query = "INSERT INTO blog_posts(uploader_name,blog_content,photo_name,category)";
                 $insert_query .= "VALUES ('$name' , '$post_content' , '$file_name','$post_category')";
@@ -76,7 +83,7 @@
                     die('Query Failed'.mysqli_error()); 
                 }
           
-                 $fetch_query = "SELECT * FROM blog_login WHERE name like '%$name%'";
+                $fetch_query = "SELECT * FROM blog_login WHERE name like '%$name%'";
         
                 $fetch_result = mysqli_query($connection,$fetch_query);
 
@@ -86,11 +93,14 @@
                 }
                 while($row = mysqli_fetch_assoc($fetch_result))
                 {
-                    $followers = $row['followers'];          
-//                    echo $followers;
+                    $followers = $row['followers'];
+                    
+        
+                    
+                    echo $followers;
                     
                     $substr = substr($followers,3);
-                    echo $substr."substr";
+//                    echo $substr."substr";
                     
                     if($substr != "")
                     {
@@ -100,12 +110,15 @@
                         $num = $count;
 //                        echo $num;
                         
+                        echo "asdasdsadasd";
+                        
                         while($num > 0 )
                         {   
 //                            echo "new".$num."new";
 //                            $main_explode = $explode['$count'];
                             $first = ucfirst($explode[$num-1]);
                             
+                            echo "asdasd";
                             
                             $second_query = "SELECT * FROM blog_login WHERE name LIKE '%$first%'";
         
@@ -122,12 +135,12 @@
                             
                             $main_recent_post = $recent_post." , ".$name;
                             
-                            echo $main_recent_post;
+//                            echo $main_recent_post;
                             
 //                            echo $first;
                             $query = "UPDATE blog_login SET ";
-                            $query .= "recent_post = '$main_recent_post '";
-                            $query .= "WHERE name = '$first'";       
+                            $query .= "recent_post = '$main_recent_post'";
+                            $query .= "WHERE uploader_name = '$first'";       
                             
                             $result = mysqli_query($connection,$query);
 //                            $count  = $count - 1;
@@ -161,7 +174,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
       <ul class="nav navbar-nav">
-       <li><a href="#" id=l2 > New Post </a></li>
+<!--       <li><a href="#" id=l2 > New Post </a></li>-->
 <!--
         <li class="dropdown" id=d1 >
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" id=dl1> Dropdown <span class="caret"></span></a>
@@ -170,7 +183,7 @@
             <li><a href="#" id=dml1 >Action</a></li>
             <li><a href="#" id=dml2 >Another action</a></li>
             <li><a href="#" id=dml3 >Something else here</a></li>
-          </ul>
+          </ul> 
         </li>
 -->
       </ul>
@@ -181,7 +194,7 @@
         <button type="submit" name=search class="btn btn-default" id=btn1 >Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-       <li><a href="" id=l3 > Admin </a></li>
+<!--       <li><a href="" id=l3 > Admin </a></li>-->
        <li><a href="notification1.php" id=l4 > Notification <span class="badge" id=badge > <?php echo $unseen; ?> </span> </a></li>
        <li><a href="main_followers.php" id=l4 > Followers <span class="badge" id=badge id=badge> <?php echo $total_followers; ?> </span> </a></li>
        <li><a href="main_following.php" id=l5 > Following <span class="badge " id=badge id=badge> <?php echo $total_following; ?> </span> </a></li>
@@ -219,7 +232,7 @@
                     
                     <div class="col-md-4" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Education class="btn btn-warning col-md-12 col-sm-12 col-xs-12 " > Education </button> </div>
                     <div class="col-md-4" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Technology class="btn btn-primary col-md-12 col-sm-12 col-xs-12" > Technology </button> </div>
-                    <div class="col-md-4" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Bussiness class="btn btn-success col-md-12 col-sm-12 col-xs-12" > Bussiness </button> </div>
+                    <div class="col-md-4" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Business class="btn btn-success col-md-12 col-sm-12 col-xs-12" > Business </button> </div>
                     <div class="col-md-8" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Science class="btn btn-primary col-md-12 col-sm-12 col-xs-12" > 
                     Science </button> </div>
                     <div class="col-md-4" style="margin:0px;padding:2px 2px;" > <button type="submit" name=Sports class="btn btn-warning col-md-12 col-sm-12 col-xs-12" > Sports </button> </div>
@@ -283,15 +296,15 @@
                 <div class="row" style="margin-top: 20px;" >
                     <div class="col-md-5 col-xs-5 ">
                        <form action="like.php" method=post enctype="multipart/form-data">
-                        <div class="col-md-6 col-xs-6" style="text-align:right;" ><button type="submit" name="<?php echo $id; ?>" class=" btn btn-default fa fa-thumbs-up" id=fa></button></div>
+                        <div class="col-md-6 col-xs-6" style="text-align:right;" ><button type="submit"     name="<?php echo $id; ?>" class=" btn btn-default fa fa-thumbs-up" id=fa></button></div>
                         </form>
                         <div class="col-md-6 col-xs-6 " style="letter-spacing: 2px;font-family: 'Niramit', sans-serif;;margin-left: -20px;margin-right: 4px;cursor: pointer;color: orangered;" ><span class=badge id=badge1 ><?php echo $like_counter; ?></span> </div>
-                    </div><!-- 
+                    </div>
                     <div class="col-md-3 col-xs-3 " style="font-family: 'Niramit', sans-serif;text-align: center;letter-spacing: 2px;color:orangered;" > Share </div>
                     <div class="col-md-4 col-xs-4 ">
                         <div class="col-md-6 col-xs-6 " style="margin-top: -5px;text-align: right;" ><img src="images/if_eye_preview_see_seen_view_392505.svg" alt=""></div>
                         <div class="col-md-6 col-xs-6 " style="font-family: 'Niramit', sans-serif;text-align: left;color:#f89764;margin-left: -15px;color: orangered" > 155 </div>
-                    </div> -->
+                    </div>
 
                 </div>
                 
@@ -395,7 +408,7 @@
                   
 <!--                    <div class="col-md-12 col-sm-offset-1">-->
                            
-                            <select name=category class="form-control col-md-8 " id=t2>
+                            <select name=category class="form-control col=md-8 " id=t2>
                               <option> Select The Category </option>
                               <option> Science </option>
                               <option> Technology </option>
@@ -403,7 +416,8 @@
                               <option> Business </option>
                               <option> Sports </option>
                               <option> Health </option>
-                              <option> Marketing </option>    
+                              <option> Marketing </option>
+                                
                             </select>
 <!--                    </div>-->
                 
@@ -441,6 +455,8 @@
              
          </div>
           
+          
+             
              <?php
               
                 $trending_query = "SELECT * FROM blog_posts ORDER BY like_counter DESC";
@@ -479,7 +495,7 @@
             <?php } $post_count = $post_count - 1; } ?>  
               
           
-          
+<!--          <br>-->
       </div>
       
   </div>     

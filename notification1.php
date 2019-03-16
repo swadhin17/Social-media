@@ -29,7 +29,9 @@
    
     include "db_connect.php";
       
-      $name = "swadhin";
+     session_start();
+        
+        $name = $_SESSION['new_name'];
       
       
       
@@ -89,96 +91,141 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<?php include "notification_count_sub.php";    ?>
  
- <div class="container">
-     <ul class="nav nav-tabs">
-      <li class="active"><a href="#home" data-toggle="tab"> Latest Posts <span class="badge " id=badge >0</span> </a> </li>
-      <li><a href="#about" data-toggle="tab"> Latest Followers <span class="badge " id=badge >0</span> </a></li>
-    </ul>
+   <div class="container">
     
     
-    <div class="tab-content fade in active">
-    
-     <div class="tab-pane" id="home">
-         <br>
-      
-<!--         TAB PANE - 1  -->
-    
-           <?php
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab"> Posts <span class="badge" id=badge > <?php echo $post_unseen; ?> </span> </a></li>
+          <li><a href="#about" data-toggle="tab"> Followers <span class="badge" id=badge > <?php echo $follow_unseen; ?> </span>  </a></li>
+        </ul>
+
+
+        <div class="tab-content  fade in active">
+        
+         <div class="tab-pane " id="home">
+          <p > Tab 1 Data Here</p>
+          
+          <?php
    
-    include "db_connect.php";
+            include "db_connect.php";
+
+            
+
+//              $name = "ajay";
+             $name = $_SESSION['new_name'];
+
+              $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
+
+                $result = mysqli_query($connection,$query);
+
+                if(!$result)
+                {
+                    die('Query Failed'.mysqli_error());
+                }
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $num = 0;
+                    $followers = $row['recent_post'];
+                    $substr = substr($followers,3);
+
+                    $explode = explode(" , ",$substr);
+
+                    $count = count($explode);
+
+
+
+                    while($count != 0)
+                    {
+                        $first = ucfirst($explode[$num]);
+
+        //            echo $substr;
+        //            print_r($explode[$num]);
+                        
+                        echo $first;
+
+
+                 ?>
+
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong><?php echo($first); ?></strong> Posted a new Feed.
+                    </div>        
+            <?php   
+
+                $count = $count - 1;        
+                $num = $num + 1;    
+                    }
+                }
         
-    include "notification_count_sub.php";    
-      
-      $name = "swadhin";
-      
-      $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
+        ?>
+          
+          
+         </div>
+
+         <div class="tab-pane fade" id="about">
+          <p > Tab 2 Data Here</p>
+          
+                  <?php
+   
+            include "db_connect.php";
+
+            include "notification_count_sub.php";    
+
+              $name = $_SESSION['new_name'];
+
+              $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
+
+                $result = mysqli_query($connection,$query);
+
+                if(!$result)
+                {
+                    die('Query Failed'.mysqli_error());
+                }
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $num = 0;
+                    $followers = $row['followers'];
+                    $substr = substr($followers,3);
+
+                    $explode = explode(" , ",$substr);
+
+                    $count = count($explode);
+
+
+
+                    while($count != 0)
+                    {
+                        $first = ucfirst($explode[$num]);
+                        
+                        echo $first;
+
+        //            echo $substr;
+        //            print_r($explode[$num]);
+
+
+                 ?>
+
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong><?php print_r($first); ?></strong> Started Following You.
+                    </div>        
+            <?php   
+
+                $count = $count - 1;        
+                $num = $num + 1;    
+                    }
+                }
         
-        $result = mysqli_query($connection,$query);
-        
-        if(!$result)
-        {
-            die('Query Failed'.mysqli_error());
-        }
-        while($row = mysqli_fetch_assoc($result))
-        {
-            $num = 0;
-            $followers = $row['followers'];
-            $substr = substr($followers,3);
-            
-            $explode = explode(" , ",$substr);
-            
-            $count = count($explode);
-            
-            
-            
-            while($count != 0)
-            {
-                $first = ucfirst($explode[$num]);
-            
-//            echo $substr;
-//            print_r($explode[$num]);
-            
-            
-         ?>
-                               
-            <div class="alert alert-warning alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong><?php print_r($first);; ?></strong> Started Following You.
-            </div>        
-    <?php   
-        
-        $count = $count - 1;        
-        $num = $num + 1;    
-            }
-        }
-        
-        ?>         
+        ?>
+          
+         </div>
          
-      
-<!--         TAB PANE - 1 ENDS  -->                  
-      
-     </div>
-     
-     <div class="tab-pane fade" id="about">
-      <p > Tab 2 Data Here</p>
-     </div>
-     
+        </div>
+    
     </div>
-    
-</div>    
-  
-    <div class="container">
-    
-   
-        
-     
-        
-   
-   </div>
-    
-    
-    
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

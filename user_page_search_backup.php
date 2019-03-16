@@ -36,7 +36,7 @@
         
         $name = $_SESSION['new_name'];
       
-//        echo $name;
+        echo $name;
       
 //      if(isset($_POST['post_submit']))
 //      {
@@ -107,12 +107,16 @@
         <button type="submit" name=search class="btn btn-default" id=btn1 >Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+       <li><a href="#" id=l3 > Admin </a></li>
+       <li><a href="#" id=l4 > Notification <span class="badge" id=badge >0</span> </a></li>
+       <li><a href="#" id=l4 > Following<span class="badge" id=badge >0</span> </a></li>
+       <li><a href="#" id=l5 > Followers<span class="badge " id=badge >0</span> </a></li>
         <li class="dropdown" id=d2 >
           <a href="#" class="dropdown-toggle" id=dl2 data-toggle="dropdown"> Hi <?php echo $name; ?> <span class="caret"></span></a>    
           <ul class="dropdown-menu" id=dm2 >
             <li><a href="#" id=dm2l1 > My Blogs </a></li>
             <li><a href="#" id=dm2l2 > Profile </a></li>
-            <li><a href="logout.php" id=dm2l3 > Logout </a></li>
+            <li><a href="#" id=dm2l3 > Logout </a></li>
           </ul>
         </li>
       </ul>
@@ -138,12 +142,12 @@
                 
                 $search = $_POST['search_name'];
         
-//                $_SESSION['search_name'] = $search;
+                $_SESSION['search_name'] = $search;
                 
-//                $search = $_SESSION['search_name'];
+                $search = $_SESSION['search_name'];
             
-//          echo "hhhhhhhhhhh".$_SESSION['search_name'];      
-//                echo $search;
+          echo "hhhhhhhhhhh".$_SESSION['search_name'];      
+                echo $search;
                 
                   $fetch_query = "SELECT * FROM blog_login WHERE name LIKE '%$search%'";
                   $fetch_result = mysqli_query($connection , $fetch_query);
@@ -157,32 +161,10 @@
                       
                       
                   }
-            
-            $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
-        
-            $result = mysqli_query($connection,$query);
-
-            if(!$result)
-            {
-                die('Query Failed'.mysqli_error());
-            }
-            while($row = mysqli_fetch_assoc($result))
-            {
-                $following = $row['following'];
-            }
-
-            $substr_following = substr($following,3);    
-            $explode_following = explode(" , ",$substr_following);
-            $total_following = count($explode_following);
-
-    //        echo $followers."<br>";
-    //        print_r($explode_followers);
-//            $i = $total_following-1;
-            
-                
-    
                 
                 $photo_name = "";
+                
+//                echo $uploader_name;
                 
                 if($photo_name == "")
                 {
@@ -194,34 +176,16 @@
                 }
             
             
-            
-//                    echo "Got Irix";
-                
-//                    echo "no";
-                
-            
-            
         ?>    
                 
             
-            <form action="follow.php" method="post" class="navbar-form navbar-left">        
+            <form action="user_page_search.php" method="post" class="navbar-form navbar-left">        
                 <div class="thumbnail">
                   <img src="images/<?php if($count == 1 ) {echo "Desert.jpg";} else { echo "emp1.jpg"; } ?>" alt="...">
                   <div class="caption">
                     <h3> <?php echo ucfirst($uploader_name); ?> </h3>
                     <p> <?php echo $email_name; ?> </p>
-                <?php     
-                if (in_array($search, $explode_following)) 
-                { 
-                ?>    
-                    <button type="submit" class="btn btn-success  " name=follow > + Un-Follow </button>         
-                         
-                <?php   } else { 
-                    ?>
-                        <button type="submit" class="btn btn-primary  " name=follow > + Follow </button>         
-                
-                <?php } ?>                   
-                            
+                        <button type="submit" class="btn btn-primary  " name=follow > + Follow </button>      
                   </div>
                 </div>
             </form>        
@@ -240,7 +204,7 @@
  
     <?php
   
-      if(isset($_POST['search']))
+      if(isset($_POST['search']) || ($_SESSION['post']))
       {
           $search = $_POST['search_name'];
           
@@ -254,7 +218,7 @@
           
 //          $_SESSION['post'] = $_POST;
           
-//          echo "hhhhhhhhhhh".$_SESSION['search_name'];
+          echo "hhhhhhhhhhh".$_SESSION['search_name'];
           
           $query = "SELECT * FROM blog_posts WHERE uploader_name LIKE '%$search%'";
           $search_query = mysqli_query($connection , $query);
@@ -323,83 +287,80 @@
     ?>
     
       <?php
-      
-            include "follow.php";
-      
-////        echo $search;
-//          if(isset($_POST['follow']))
-//          {
-//              $search = $_SESSION['search_name'];
+//        echo $search;
+          if(isset($_POST['follow']))
+          {
+              $search = $_SESSION['search_name'];
+              
+//            -$following_query = "UPDATE blog_login SET following(ifnull(following,''),'$search') ";
+//              update tablename set col1name = concat(ifnull(col1name,""), 'a,b,c');
 //              
-////            -$following_query = "UPDATE blog_login SET following(ifnull(following,''),'$search') ";
-////              update tablename set col1name = concat(ifnull(col1name,""), 'a,b,c');
-////              
-////            $following_query = "UPDATE blog_login SET following = '' where following is null; ";
-//              
-//              $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
-//        
-//                $result = mysqli_query($connection,$query);
-//
-//                if(!$result)
-//                {
-//                    die('Query Failed'.mysqli_error());
-//                }
-//                while($row = mysqli_fetch_assoc($result))
-//                {
-//                    $following = $row['following'];
-//                }
-//              
-//              $second_query = "SELECT * FROM blog_login WHERE name LIKE '%$search%'";
-//        
-//                $second_result = mysqli_query($connection,$second_query);
-//
-//                if(!$result)
-//                {
-//                    die('Query Failed'.mysqli_error());
-//                }
-//                while($row = mysqli_fetch_assoc($second_result))
-//                {
-//                    $followers = $row['followers'];
-//                }
-//              
-//            
-//                $main_following = $following." , ".$search;
-////                $main_followers = $search;
-//              
-////              $search = swadhin ka data fecth karo + ajay
-//                $search_followers = $followers." , ".$name;
-//              
-//              
-////              echo $main_following." ".$main_followers;
-//              
-//            $following_query = "UPDATE blog_login SET ";
-//            $following_query .= "following = '$main_following'";
-//            $following_query .= "WHERE name = '$name'";   
-//            
-//              
-//              
-//            
-//              
-//              $following_result = mysqli_query($connection,$following_query);
-//
-//                if(!$following_result)  
-//                {
-//                    die('Query Failed'.mysqli_error($connection)); 
-//                }
-//              
-//                $followers_query = "UPDATE blog_login SET ";
-//                $followers_query .= "followers = '$search_followers'";
-//                $followers_query .= "WHERE name = '$search'";
-//              
-//              $followers_result = mysqli_query($connection,$followers_query);
-//
-//                if(!$followers_result)
-//                {
-//                    die('Query Failed'.mysqli_error($connection)); 
-//                }
-//                           
-//              
-//          }
+//            $following_query = "UPDATE blog_login SET following = '' where following is null; ";
+              
+              $query = "SELECT * FROM blog_login WHERE name LIKE '%$name%'";
+        
+                $result = mysqli_query($connection,$query);
+
+                if(!$result)
+                {
+                    die('Query Failed'.mysqli_error());
+                }
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    $following = $row['following'];
+                }
+              
+              $second_query = "SELECT * FROM blog_login WHERE name LIKE '%$search%'";
+        
+                $second_result = mysqli_query($connection,$second_query);
+
+                if(!$result)
+                {
+                    die('Query Failed'.mysqli_error());
+                }
+                while($row = mysqli_fetch_assoc($second_result))
+                {
+                    $followers = $row['followers'];
+                }
+              
+            
+                $main_following = $following." , ".$search;
+//                $main_followers = $search;
+              
+//              $search = swadhin ka data fecth karo + ajay
+                $search_followers = $followers." , ".$name;
+              
+              
+//              echo $main_following." ".$main_followers;
+              
+            $following_query = "UPDATE blog_login SET ";
+            $following_query .= "following = '$main_following'";
+            $following_query .= "WHERE name = '$name'";   
+            
+              
+              
+            
+              
+              $following_result = mysqli_query($connection,$following_query);
+
+                if(!$following_result)  
+                {
+                    die('Query Failed'.mysqli_error($connection)); 
+                }
+              
+                $followers_query = "UPDATE blog_login SET ";
+                $followers_query .= "followers = '$search_followers'";
+                $followers_query .= "WHERE name = '$search'";
+              
+              $followers_result = mysqli_query($connection,$followers_query);
+
+                if(!$followers_result)
+                {
+                    die('Query Failed'.mysqli_error($connection)); 
+                }
+                           
+              
+          }
       
         ?>
    
@@ -438,6 +399,49 @@
                   <button type="submit" name="post_submit" class="btn btn-warning col-md-12 col-sm-8 col-xs-12 " > Post </button>
               </div>
               </form>
+          </div>
+          
+      </div>
+      
+      <div class="row" id=row2 >
+         
+         <div class="page-header">
+             
+             <h3> Trending Posts </h3>
+             
+         </div>
+          
+          <div class="thumbnail">
+              <img src="images/emp1.jpg" alt="...">
+              <div class="caption">
+                <h3 id=thheading > - Savan Jasani <small> posted before 3 days </small> </h3>
+                <p class="thpara" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, aliquid, ullam! Optio aspernatur repellendus quidem beatae consequuntur voluptatibus quibusdam quo libero, necessitatibus eaque modi esse possimus rerum ab facilis accusantium?</p>
+
+                <div class="row" style="margin-top: 20px;" >
+                    <div class="col-md-5 col-xs-5 ">
+                        <div class="col-md-6 col-xs-6 " style="text-align: right;" ><i onclick="myFunction(this)" class="fa fa-thumbs-up" id=fa></i></div>
+                        <div class="col-md-6 col-xs-6 " style="text-align: left;letter-spacing: 2px;font-family: 'Niramit', sans-serif;;margin-left: -20px;margin-right: 4px;cursor: pointer;color: orangered;" > Like <span class=badge id=badge1 >1</span> </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 " style="font-family: 'Niramit', sans-serif;text-align: center;letter-spacing: 2px;color:orangered;" > Share </div>
+                    <div class="col-md-4 col-xs-4 ">
+                        <div class="col-md-6 col-xs-6 " style="margin-top: -5px;text-align: right;" ><img src="images/if_eye_preview_see_seen_view_392505.svg" alt=""></div>
+                        <div class="col-md-6 col-xs-6 " style="font-family: 'Niramit', sans-serif;text-align: left;color:#f89764;margin-left: -15px;color: orangered" > 155 </div>
+                    </div>
+
+                </div>
+
+                <div class="row" style="margin-top: 4px;" >
+
+                    <div class="col-md-12">
+                    <form action="comment.php" method="post" >
+                        <div class="col-md-7 col-sm-7 col-xs-7"><textarea id=textarea name="comments" id="" cols="" rows="" placeholder="Comments..."></textarea></div>    
+                        <div class="col-md-4 col-sm-4 col-xs-4 "><button class="btn btn-default" id="btn4" > Submit Comment </button></div>
+                    </form>
+                    </div>
+
+                </div>
+
+              </div>
           </div>
           
       </div>
