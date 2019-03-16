@@ -1,0 +1,200 @@
+ 
+html
+{
+    overflow-x: hidden;
+}
+
+/*  THE HEADING   */
+
+.heading1
+{
+    text-align: center;
+}
+#cont1
+{
+/*    background-color: aliceblue;*/
+    margin-top: 40px;
+    height: 60px;
+/*    background: red;*/
+}
+.para1
+{
+    font-family: arial;
+    font-size: 25px;
+    letter-spacing: 3px;
+    padding: 10px 0px;
+}
+
+@media screen and (max-width:478px)
+{
+    #cont1
+    {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+}
+.fi
+{
+    color: #f77c56;
+    font-size: 35px;
+}
+.t
+{
+    color: #f77c56;
+    font-size: 35px;
+}
+.f
+{
+    color: #f77c56;
+    font-size: 35px;
+}
+.d
+{
+    color: #f77c56;
+    font-size: 35px;
+}
+
+/*   SECTION 1 */
+
+#row1
+{
+/*    border: 1px solid black;*/
+    
+}
+#row1
+{
+    padding: 0px;
+    margin: 0px;
+/*    border: 1px solid black;*/
+    height: 500px;
+}
+
+.col-md-6 , col-md-offset-3
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+#col-md-6-1
+{
+/*    border: 1px solid black;*/
+}
+
+.col-md-offset-3
+{
+/*    border: 1px solid red;*/
+}
+
+#cont2
+{
+    border: 2px solid #fbb9a5;
+    border-top: 50px solid #fbb9a5;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0 auto;
+/*    height: 400px;*/
+}
+#cont2:hover
+{
+    border: 2px solid #faa875;
+    border-top: 50px solid #faa875;;
+    border-radius: 5px;
+    width: 90%;
+    margin: 0 auto;
+/*    height: 400px;*/
+}
+
+#t1
+{
+    height: 60px;
+    background-color:#fde5b2;
+}
+#t1:hover
+{
+    height: 60px;
+    background-color:#fef6c3;
+    
+}
+#fg1
+{
+/*    border: 1px solid brown;*/
+/* -       margin:10px 0px;*/
+/*    border: 1px solid red;*/
+}
+
+#ig1 
+{
+    height: 45px;
+/*        background-color: lightgreen;*/
+    border: 0px solid white;
+    border-radius: 0px;
+}
+#ib1 
+{
+    height: 45px;
+/*            background-color: lightgreen;*/
+    border: 0px solid white;
+    border-radius: 0px;
+}
+#sb1 
+{    
+    height: 60px;
+    width: 60px;
+    background-color:#feeebb;
+    color: #fbc28f;
+    font-size: 17px;
+}
+#sb1:hover
+{    
+    height: 60px;
+    width: 60px;
+    background-color:#feeebb;
+    color:#fbb986;
+    font-size: 17px;
+}
+input[type=text]
+{
+    font-family: 'Montserrat', sans-serif;
+/*    color: blue;    */
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+}
+
+input[type=select]
+{
+    font-family: 'Montserrat', sans-serif;
+/*    color: blue;    */
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+}
+#btn1
+{    
+    height: 40px;
+    margin-left:0%;
+    background-color:#fbb9a5;
+    border: 1px solid #fbb9a5;
+    color: black;
+    letter-spacing: 2px;
+}
+#btn1:hover
+{    
+    height: 40px;
+    margin-left:0%;
+    background-color:#fbb986;
+    color: black;
+    letter-spacing: 1px;
+    transition: .5s;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width:478px)
+{
+    input[type=text]
+    {
+        font-family: 'Montserrat', sans-serif;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 14px;
+    }
+}
