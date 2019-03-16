@@ -1,0 +1,65 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+#cap{
+    font-size: 50px;
+    color: orangered;
+}
+
+#title-id{
+    text-align: center;
+    padding-top: 30px;
+    letter-spacing: 1.5px;
+}
+
+#nav_id{
+    background: #ffa366;
+
+}
+
+nav a{
+    background: #ffa366;
+}
+
+#nav-text:hover{
+    background: #ffe4cc;
+    letter-spacing: 1px;
+    color: black;
+    height: 100%;
+    
+}
+
+#drop-id{
+    background-color: bisque;
+    top:47px;
+}
+
+#drop_devider{
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+}
+
+#submit_id{
+    border: 0px solid yellow;
+    color: black;
+    background-color: #ffd699;
+}
+
+#submit_id:hover{
+    border: 0px solid white;
+    color: white;
+    background-color: #00b300;
+}
+
+#nav-text{
+    color: azure;
+    font-family: "niramit",sans-serif;
+}
+
+#card_id{
+    margin-top: 30px;
+    
+}
